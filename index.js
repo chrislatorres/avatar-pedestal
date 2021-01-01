@@ -80,6 +80,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   let mesh = await runtime.loadFile(file, {
     optimize: false,
   });
+  app.object.add(mesh);
 
   let close;
   const _getClose = () => {
