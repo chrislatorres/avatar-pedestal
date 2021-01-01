@@ -50,7 +50,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 // AVATARS
 
 (async () => {
-  {
     const u = 'pod.glb';
     const fileUrl = app.files['./' + u];
     const res = await fetch(fileUrl);
@@ -65,13 +64,13 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       }
     }); */
     app.object.add(mesh);
-  }
   
   const textMesh = ui.makeTextMesh('Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
   textMesh.position.y = 2.25;
   app.object.add(textMesh);
 
+/*
   const u = 'orb.glb';
   const fileUrl = app.files['./' + u];
   const res = await fetch(fileUrl);
@@ -81,6 +80,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     optimize: false,
   });
   app.object.add(mesh);
+*/
 
   let close;
   const _getClose = () => {
@@ -90,7 +90,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
     let closestWeaponDistance = Infinity;
     const distance = position.distanceTo(mesh.position);
-    if (distance < 0.5) {
+    if (distance < 1) {
       return mesh;
     } else {
       return null;
