@@ -107,6 +107,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
 
+/*
       const notification = notifications.addNotification(`\
         <i class="icon fa fa-user-ninja"></i>
         <div class=wrap>
@@ -119,6 +120,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       `, {
         timeout: Infinity,
       });
+*/
       try {
         await loginManager.setAvatar(139);
       } catch(err) {
