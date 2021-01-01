@@ -69,10 +69,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   
   const textMesh = ui.makeTextMesh('Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
-  textMesh.position.y = 2.5;
+  textMesh.position.y = 2.25;
   app.object.add(textMesh);
 
-  const u = 'weapons.glb';
+  const u = 'orb.glb';
   const fileUrl = app.files['./' + u];
   const res = await fetch(fileUrl);
   const file = await res.blob();
@@ -80,41 +80,29 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   let mesh = await runtime.loadFile(file, {
     optimize: false,
   });
-  const width = 2;
-  const weapons = mesh.children.slice();
-  for (let i = 0; i < weapons.length; i++) {
-    const child = weapons[i];
-    child.position.set(-width/2 + i/(weapons.length-1)*width, 1, 0);
-    app.object.add(child);
-  }
 
-  const _getClosestWeapon = () => {
+  let close;
+  const _getClose = () => {
     const transforms = physics.getRigTransforms();
     const position = transforms[0].position.clone()
       .applyMatrix4(localMatrix.copy(app.object.matrixWorld).invert());
-    let closestWeapon = null;
+
     let closestWeaponDistance = Infinity;
-    for (const weapon of weapons) {
-      const distance = position.distanceTo(weapon.position);
-      if (distance < closestWeaponDistance) {
-        closestWeapon = weapon;
-        closestWeaponDistance = distance;
-      }
-    }
-    if (closestWeaponDistance < 0.5) {
-      return closestWeapon;
+    const distance = position.distanceTo(mesh.position);
+    if (distance < 0.5) {
+      return mesh;
     } else {
       return null;
     }
   };
 
-  let closestWeapon = null;
   window.addEventListener('click', e => {
-    if (closestWeapon) {
-      const u = app.files['weapons/' + closestWeapon.name + '.js'];
+    if (close) {
+//      const u = app.files['weapons/' + closestWeapon.name + '.js'];
       const transforms = physics.getRigTransforms();
       const {position, quaternion} = transforms[0];
-      world.addObject(u, app.appId, position, quaternion); // XXX
+       console.log("close", position);
+//      world.addObject(u, app.appId, position, quaternion); // XXX
       // appManager.grab('right', closestWeapon);
     }
   });
@@ -126,9 +114,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     lastTimestamp = timestamp;
     const now = Date.now();
 
-    closestWeapon = _getClosestWeapon();
-    for (const weapon of weapons) {
-      weapon.scale.setScalar(weapon === closestWeapon ? 2 : 1);
-    }
+    close = _getClose();
+    weapon.scale.setScalar(mesh === close ? 2 : 1);
   });
 })();
