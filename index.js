@@ -124,9 +124,13 @@ let mesh;
         await loginManager.setAvatar(contentId);
       } catch(err) {
         console.warn(err);
-      } finally {
+      } 
+/*
+finally {
         notifications.removeNotification(notification);
       }
+*/
+
 //      world.addObject(u, app.appId, position, quaternion); // XXX
       // appManager.grab('right', closestWeapon);
     }
