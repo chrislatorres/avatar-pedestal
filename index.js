@@ -48,8 +48,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
 
 // AVATARS
-const localVector = new THREE.Vector3();
-const localMatrix = new THREE.Matrix4();
 
 (async () => {
   {
