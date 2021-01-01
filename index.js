@@ -92,7 +92,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
     let closestWeaponDistance = Infinity;
     const distance = position.distanceTo(mesh.position);
-    if (distance < 0.5) {
+    if (distance < 5) {
       return mesh;
     } else {
       return null;
@@ -107,9 +107,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
 
-/*
-      const contentId = mesh.id || mesh.contentId;
-      
       const notification = notifications.addNotification(`\
         <i class="icon fa fa-user-ninja"></i>
         <div class=wrap>
@@ -123,11 +120,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         timeout: Infinity,
       });
       try {
-        await loginManager.setAvatar(contentId);
+        await loginManager.setAvatar(139);
       } catch(err) {
         console.warn(err);
       } 
-*/
 /*
 finally {
         notifications.removeNotification(notification);
