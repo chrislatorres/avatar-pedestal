@@ -51,7 +51,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
 (async () => {
   {
-    const u = 'teleporter.glb';
+    const u = 'pod.glb';
     const fileUrl = app.files['./' + u];
     const res = await fetch(fileUrl);
     const file = await res.blob();
