@@ -69,7 +69,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   
   const textMesh = ui.makeTextMesh('Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
-  textMesh.position.y = 2;
+  textMesh.position.y = 2.5;
   app.object.add(textMesh);
 
   const u = 'weapons.glb';
