@@ -99,7 +99,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     }
   };
 
-  window.addEventListener('click', e => {
+  window.addEventListener('click', async (e) => {
     console.log(close);
     if (close) {
 //      const u = app.files['weapons/' + closestWeapon.name + '.js'];
@@ -119,12 +119,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       `, {
         timeout: Infinity,
       });
-//       await loginManager.setAvatar(139);
-/*
+      try {
+        await loginManager.setAvatar(139);
       } catch(err) {
         console.warn(err);
-      } 
-*/
+      }
 /*
 finally {
         notifications.removeNotification(notification);
