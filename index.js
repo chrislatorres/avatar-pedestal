@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
+import {notifications, loginManager, scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
 // MIRROR
 import {Reflector} from './Reflector.js';
@@ -65,7 +65,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     }); */
     app.object.add(mesh);
   
-  const textMesh = ui.makeTextMesh('Avatars', undefined, 0.2, 'center', 'middle');
+  const textMesh = ui.makeTextMesh('Stand And Click For Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
   textMesh.position.y = 2.25;
   app.object.add(textMesh);
@@ -102,7 +102,29 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 //      const u = app.files['weapons/' + closestWeapon.name + '.js'];
       const transforms = physics.getRigTransforms();
       const {position, quaternion} = transforms[0];
-       console.log("close", position);
+      console.log("close", mesh);
+
+      const contentId = mesh.id || mesh.contentId;
+      
+      const notification = notifications.addNotification(`\
+        <i class="icon fa fa-user-ninja"></i>
+        <div class=wrap>
+          <div class=label>Getting changed</div>
+          <div class=text>
+            The system is updating your avatar...
+          </div>
+          <div class=close-button>✕</div>
+        </div>
+      `, {
+        timeout: Infinity,
+      });
+      try {
+        await loginManager.setAvatar(contentId);
+      } catch(err) {
+        console.warn(err);
+      } finally {
+        notifications.removeNotification(notification);
+      }
 //      world.addObject(u, app.appId, position, quaternion); // XXX
       // appManager.grab('right', closestWeapon);
     }
