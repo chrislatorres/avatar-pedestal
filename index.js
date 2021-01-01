@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import {notifications, loginManager, scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
+console.log("got in 1");
+
 // MIRROR
 import {Reflector} from './Reflector.js';
 
@@ -106,6 +108,7 @@ let mesh;
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
 
+/*
       const contentId = mesh.id || mesh.contentId;
       
       const notification = notifications.addNotification(`\
@@ -125,6 +128,7 @@ let mesh;
       } catch(err) {
         console.warn(err);
       } 
+*/
 /*
 finally {
         notifications.removeNotification(notification);
