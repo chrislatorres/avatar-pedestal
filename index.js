@@ -51,14 +51,13 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
 // AVATARS
 
-let mesh;
 (async () => {
   const u = 'pod.glb';
   const fileUrl = app.files['./' + u];
   const res = await fetch(fileUrl);
   const file = await res.blob();
   file.name = u;
-  mesh = await runtime.loadFile(file, {
+  const mesh = await runtime.loadFile(file, {
     optimize: false,
   });
   /* mesh.traverse(o => {
@@ -101,6 +100,7 @@ let mesh;
   };
 
   window.addEventListener('click', e => {
+    console.log(close);
     if (close) {
 //      const u = app.files['weapons/' + closestWeapon.name + '.js'];
       const transforms = physics.getRigTransforms();
