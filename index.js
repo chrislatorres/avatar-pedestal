@@ -65,7 +65,7 @@ let mesh;
       }
     }); */
     app.object.add(mesh);
-}();
+})();
   
   const textMesh = ui.makeTextMesh('Stand And Click For Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
