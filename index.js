@@ -115,6 +115,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     const now = Date.now();
 
     close = _getClose();
-    weapon.scale.setScalar(mesh === close ? 2 : 1);
+    mesh.scale.setScalar(mesh === close ? 2 : 1);
   });
 })();
