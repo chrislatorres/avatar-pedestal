@@ -1,6 +1,53 @@
 import * as THREE from 'three';
 import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
+// MIRROR
+import {Reflector} from './Reflector.js';
+
+const localVector = new THREE.Vector3();
+const localMatrix = new THREE.Matrix4();
+
+const mirrorWidth = 2;
+const mirrorHeight = 2;
+const mirrorDepth = 0.1;
+const mirrorMesh = (() => {
+  const geometry = new THREE.PlaneBufferGeometry(mirrorWidth, mirrorHeight)
+    .applyMatrix4(new THREE.Matrix4().makeTranslation(0, 1, 0));
+  const mesh = new Reflector(geometry, {
+    clipBias: 0.003,
+    textureWidth: 2048 * window.devicePixelRatio,
+    textureHeight: 2048 * window.devicePixelRatio,
+    color: 0x889999,
+    addColor: 0x300000,
+    recursion: 1,
+    transparent: true,
+  });
+  mesh.position.set(0, 0, 0);
+
+  const borderMesh = new THREE.Mesh(
+    new THREE.BoxBufferGeometry(mirrorWidth + mirrorDepth, mirrorHeight + mirrorDepth, mirrorDepth)
+      .applyMatrix4(new THREE.Matrix4().makeTranslation(0, 1, -mirrorDepth/2 - 0.01)),
+    new THREE.MeshPhongMaterial({
+      color: 0x000000,
+    })
+  );
+  mesh.add(borderMesh);
+
+  mesh.onBeforeRender2 = () => {
+    app.onBeforeRender();
+  };
+  mesh.onAfterRender2 = () => {
+    app.onAfterRender();
+  };
+
+  return mesh;
+})();
+app.object.add(mirrorMesh);
+
+const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quaternion, new THREE.Vector3(mirrorWidth, mirrorHeight, mirrorDepth).multiplyScalar(0.5), false);
+
+
+// AVATARS
 const localVector = new THREE.Vector3();
 const localMatrix = new THREE.Matrix4();
 
