@@ -49,13 +49,14 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
 // AVATARS
 
+let mesh;
 (async () => {
     const u = 'pod.glb';
     const fileUrl = app.files['./' + u];
     const res = await fetch(fileUrl);
     const file = await res.blob();
     file.name = u;
-    let mesh = await runtime.loadFile(file, {
+    mesh = await runtime.loadFile(file, {
       optimize: false,
     });
     /* mesh.traverse(o => {
@@ -64,6 +65,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       }
     }); */
     app.object.add(mesh);
+}();
   
   const textMesh = ui.makeTextMesh('Stand And Click For Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
