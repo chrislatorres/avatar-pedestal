@@ -121,11 +121,12 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         timeout: Infinity,
       });
 */
-      try {
-        await loginManager.setAvatar(139);
+       await loginManager.setAvatar(139);
+/*
       } catch(err) {
         console.warn(err);
       } 
+*/
 /*
 finally {
         notifications.removeNotification(notification);
