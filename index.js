@@ -93,7 +93,7 @@ let mesh;
 
     let closestWeaponDistance = Infinity;
     const distance = position.distanceTo(mesh.position);
-    if (distance < 1) {
+    if (distance < 0.5) {
       return mesh;
     } else {
       return null;
