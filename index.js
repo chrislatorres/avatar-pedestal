@@ -1,8 +1,6 @@
 import * as THREE from 'three';
 import {notifications, loginManager, scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
-console.log("got in 1");
-
 // MIRROR
 import {Reflector} from './Reflector.js';
 
@@ -50,7 +48,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
 
 // AVATARS
-
 (async () => {
   const u = 'pod.glb';
   const fileUrl = app.files['./' + u];
@@ -60,29 +57,12 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   const mesh = await runtime.loadFile(file, {
     optimize: false,
   });
-  /* mesh.traverse(o => {
-    if (o.isLight) {
-      o.visible = false;
-    }
-  }); */
   app.object.add(mesh);
   
   const textMesh = ui.makeTextMesh('Stand And Click For Avatars', undefined, 0.2, 'center', 'middle');
   textMesh.color = 0xCCCCCC;
   textMesh.position.y = 2.25;
   app.object.add(textMesh);
-
-/*
-  const u = 'orb.glb';
-  const fileUrl = app.files['./' + u];
-  const res = await fetch(fileUrl);
-  const file = await res.blob();
-  file.name = u;
-  let mesh = await runtime.loadFile(file, {
-    optimize: false,
-  });
-  app.object.add(mesh);
-*/
 
   let close;
   const _getClose = () => {
@@ -102,10 +82,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   window.addEventListener('click', async (e) => {
     console.log(close);
     if (close) {
-//      const u = app.files['weapons/' + closestWeapon.name + '.js'];
       const transforms = physics.getRigTransforms();
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
+
+      const avatars = [14, 44, 225, 1, 4];
 
       const notification = notifications.addNotification(`\
         <i class="icon fa fa-user-ninja"></i>
@@ -120,18 +101,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         timeout: Infinity,
       });
       try {
-        await loginManager.setAvatar(139);
+        const randomId = avatars[Math.floor(Math.random() * avatars.length)];
+        await loginManager.setAvatar(randomId);
       } catch(err) {
         console.warn(err);
       }
-/*
-finally {
-        notifications.removeNotification(notification);
-      }
-*/
-
-//      world.addObject(u, app.appId, position, quaternion); // XXX
-      // appManager.grab('right', closestWeapon);
     }
   });
 
