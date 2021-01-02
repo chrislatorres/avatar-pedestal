@@ -91,14 +91,14 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       try {
         if (currentAvatar) {
           console.log("currentAvatar removing", currentAvatar);
-          world.removeObject(currentAvatar);
+          await world.removeObject(currentAvatar);
         }
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
         const u = app.files['./' + randomAvatar];
         const transforms = physics.getRigTransforms();
         const {position, quaternion} = transforms[0];
-        currentAvatar = world.addObject(u, app.appId, position, quaternion); // XXX
+        currentAvatar = await world.addObject(u, app.appId, position, quaternion); // XXX
         console.log("currentAvatar set", currentAvatar);
 
 //        currentAvatar = u;
