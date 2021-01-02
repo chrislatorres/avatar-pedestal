@@ -83,9 +83,12 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   window.addEventListener('click', async (e) => {
     if (!lock && close) {
       lock = true;
-      const transforms = physics.getRigTransforms();
-      const {position, quaternion} = transforms[0];
+//      const transforms = physics.getRigTransforms();
+//      const {position, quaternion} = transforms[0];
+      const {position, quaternion} = mesh;
       console.log("close", mesh);
+      console.log("position", position);
+      console.log("quaternion", quaternion);
 
       const avatars = ["teal.vrm", "suit.vrm"];
 
@@ -97,8 +100,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
         const u = app.files['./' + randomAvatar];
-        const transforms = physics.getRigTransforms();
-        const {position, quaternion} = transforms[0];
         await world.addObject(u, app.appId, position, quaternion); // XXX
 
         const objects = world.getObjects();
