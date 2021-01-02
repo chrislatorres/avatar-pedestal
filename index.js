@@ -95,14 +95,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         }
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-        const fileUrl = app.files['./' + randomAvatar];
-        const res = await fetch(fileUrl);
-        const file = await res.blob();
-        file.name = u;
-        const mesh = await runtime.loadFile(file, {
-          optimize: false,
-        });
-        app.object.add(mesh);
+        const u = app.files['./' + randomAvatar];
+        const transforms = physics.getRigTransforms();
+        const {position, quaternion} = transforms[0];
+        world.addObject(u, app.appId, position, quaternion); // XXX
+
         currentAvatar = mesh;
       } catch(err) {
         console.warn(err);
