@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {notifications, loginManager, scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
+import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
 // MIRROR
 import {Reflector} from './Reflector.js';
