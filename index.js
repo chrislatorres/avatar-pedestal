@@ -85,9 +85,19 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       lock = true;
 //      const transforms = physics.getRigTransforms();
 //      const {position, quaternion} = transforms[0];
-      const pod = world.getObjects().find(o => o.contentId === fileUrl);
-      const {position, quaternion} = pod;
       console.log("world.getObjects()", world.getObjects());
+      console.log("fileUrl", fileUrl);
+
+        let pod;
+        const objs = world.getObjects();
+        objs.forEach(obj => {
+          if (obj.contentId === u)  {
+            pod = obj;
+          }
+        });
+      const podFind = world.getObjects().find(o => o.contentId === fileUrl);
+      console.log("podFind", podFind);
+      const {position, quaternion} = pod;
 
       const avatars = ["teal.vrm", "suit.vrm"];
 
