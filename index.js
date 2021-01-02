@@ -95,7 +95,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         }
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-        const fileUrl = app.files['./' + u];
+        const fileUrl = app.files['./' + randomAvatar];
         const res = await fetch(fileUrl);
         const file = await res.blob();
         file.name = u;
