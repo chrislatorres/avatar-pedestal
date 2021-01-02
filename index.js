@@ -113,8 +113,8 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         lock = false;
       }
     }
-    if (avatarIndex === 10) {
-      avatarIndex = 0;
+    if (avatarIndex === 16) {
+      avatarIndex = 1;
     } else {
       avatarIndex++;
     }
