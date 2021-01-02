@@ -72,13 +72,14 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
     let closestWeaponDistance = Infinity;
     const distance = position.distanceTo(mesh.position);
-    if (distance < 5) {
+    if (distance < 4) {
       return mesh;
     } else {
       return null;
     }
   };
 
+  let currentAvatar;
   window.addEventListener('click', async (e) => {
     console.log(close);
     if (close) {
@@ -86,23 +87,23 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
 
-      const avatars = [14, 44, 225, 1, 4];
+      const avatars = ["teal.vrm", "suit.vrm"];
 
-      const notification = notifications.addNotification(`\
-        <i class="icon fa fa-user-ninja"></i>
-        <div class=wrap>
-          <div class=label>Getting changed</div>
-          <div class=text>
-            The system is updating your avatar...
-          </div>
-          <div class=close-button>✕</div>
-        </div>
-      `, {
-        timeout: Infinity,
-      });
       try {
-        const randomId = avatars[Math.floor(Math.random() * avatars.length)];
-        await loginManager.setAvatar(randomId);
+        if (currentAvatar) {
+          app.object.remove(currentAvatar);
+        }
+        const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
+        const fileUrl = app.files['./' + u];
+        const res = await fetch(fileUrl);
+        const file = await res.blob();
+        file.name = u;
+        const mesh = await runtime.loadFile(file, {
+          optimize: false,
+        });
+        app.object.add(mesh);
+        currentAvatar = mesh;
       } catch(err) {
         console.warn(err);
       }
@@ -118,5 +119,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
     close = _getClose();
     mesh.scale.setScalar(mesh === close ? 2 : 1);
+    textMesh.scale.setScalar(mesh === close ? 2 : 1);
+    mirrorMesh.scale.setScalar(mesh === close ? 2 : 1);
   });
 })();
