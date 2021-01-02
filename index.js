@@ -86,8 +86,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
       console.log("world.getObjects()", world.getObjects());
       const {position, quaternion} = app.object;
+      console.log("position1", position);
       const rotation = new THREE.Matrix4().makeRotationZ(Math.PI/2);
-      position.applyMatrix4(rotation);
+      position = position.applyMatrix4(rotation);
+      console.log("position2", position);
 
 
       const avatars = ["teal.vrm", "suit.vrm"];
