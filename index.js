@@ -103,13 +103,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         await world.addObject(u, app.appId, position, quaternion); // XXX
 
         const objects = world.getObjects();
-        if (objects) {
-          Promise.all(objects.forEach(obj => {
-            if (obj.contentId === u)  {
-              currentAvatar = obj.instanceId;
-            }
-          }));
-        }
+        objects.forEach(obj => {
+          if (obj.contentId === u)  {
+            currentAvatar = obj.instanceId;
+          }
+        });
       } catch(err) {
         console.warn(err);
       }
