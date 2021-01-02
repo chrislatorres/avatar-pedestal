@@ -82,7 +82,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   window.addEventListener('click', async (e) => {
     console.log("close", close);
     console.log("app", app);
-    console.log("app.apps", app.apps);
+    console.log("world.getObjects", world.getObjects());
     if (close) {
       const transforms = physics.getRigTransforms();
       const {position, quaternion} = transforms[0];
