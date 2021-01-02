@@ -70,7 +70,6 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     const position = transforms[0].position.clone()
       .applyMatrix4(localMatrix.copy(app.object.matrixWorld).invert());
 
-    let closestWeaponDistance = Infinity;
     const distance = position.distanceTo(mesh.position);
     if (distance < 4) {
       return mesh;
@@ -91,7 +90,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
       try {
         if (currentAvatar) {
-          app.object.remove(currentAvatar);
+          world.removeObject(currentAvatar);
         }
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
@@ -100,7 +99,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         const {position, quaternion} = transforms[0];
         world.addObject(u, app.appId, position, quaternion); // XXX
 
-        currentAvatar = mesh;
+        currentAvatar = u;
       } catch(err) {
         console.warn(err);
       }
@@ -115,8 +114,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     const now = Date.now();
 
     close = _getClose();
+/*
     mesh.scale.setScalar(mesh === close ? 2 : 1);
     textMesh.scale.setScalar(mesh === close ? 2 : 1);
     mirrorMesh.scale.setScalar(mesh === close ? 2 : 1);
+*/
   });
 })();
