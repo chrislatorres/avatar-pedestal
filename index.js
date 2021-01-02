@@ -90,6 +90,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
 
       try {
         if (currentAvatar) {
+          console.log("currentAvatar removing", currentAvatar);
           world.removeObject(currentAvatar);
         }
         const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
@@ -98,6 +99,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         const transforms = physics.getRigTransforms();
         const {position, quaternion} = transforms[0];
         currentAvatar = world.addObject(u, app.appId, position, quaternion); // XXX
+        console.log("currentAvatar set", currentAvatar);
 
 //        currentAvatar = u;
       } catch(err) {
