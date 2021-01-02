@@ -86,7 +86,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       lock = true;
 
       const quaternion = app.object.quaternion.clone().setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
-      const position = app.object.position.clone();
+      const position = app.object.position.clone().translateZ(3);
       console.log("position2", position);
 
 
