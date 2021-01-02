@@ -79,11 +79,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
   };
 
   let currentAvatar;
+  let lock = false;
   window.addEventListener('click', async (e) => {
-    console.log("close", close);
-    console.log("app", app);
-    console.log("world.getObjects", world.getObjects());
-    if (close) {
+    if (!lock && close) {
+      lock = true;
       const transforms = physics.getRigTransforms();
       const {position, quaternion} = transforms[0];
       console.log("close", mesh);
@@ -106,10 +105,12 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         objects.forEach(obj => {
           if (obj.contentId === u)  {
             currentAvatar = obj.instanceId;
+            lock = false;
           }
         });
       } catch(err) {
         console.warn(err);
+        lock = false;
       }
     }
   });
