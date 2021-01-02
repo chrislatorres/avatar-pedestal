@@ -71,7 +71,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       .applyMatrix4(localMatrix.copy(app.object.matrixWorld).invert());
 
     const distance = position.distanceTo(mesh.position);
-    if (distance < 4) {
+    if (distance < 2) {
       return mesh;
     } else {
       return null;
@@ -97,9 +97,9 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         const u = app.files['./' + randomAvatar];
         const transforms = physics.getRigTransforms();
         const {position, quaternion} = transforms[0];
-        world.addObject(u, app.appId, position, quaternion); // XXX
+        currentAvatar = world.addObject(u, app.appId, position, quaternion); // XXX
 
-        currentAvatar = u;
+//        currentAvatar = u;
       } catch(err) {
         console.warn(err);
       }
