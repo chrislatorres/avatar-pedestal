@@ -85,10 +85,10 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       lock = true;
 
       console.log("world.getObjects()", world.getObjects());
-      const {position, quaternion} = app.object;
+      const {quaternion} = app.object;
       console.log("position1", position);
       const rotation = new THREE.Matrix4().makeRotationZ(Math.PI/2);
-      position = position.applyMatrix4(rotation);
+      position = app.object.position.applyMatrix4(rotation);
       console.log("position2", position);
 
 
