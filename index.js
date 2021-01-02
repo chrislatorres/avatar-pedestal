@@ -79,6 +79,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
     }
   };
 
+  let avatarIndex = 1;
   let currentAvatar;
   let lock = false;
   window.addEventListener('click', async (e) => {
@@ -91,16 +92,13 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       console.log("position2", position);
 
 
-      const avatars = ["teal.vrm", "suit.vrm"];
-
       try {
         if (currentAvatar) {
           console.log("currentAvatar removing", currentAvatar);
           await world.removeObject(currentAvatar);
         }
-        const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
 
-        const u = app.files['./' + randomAvatar];
+        const u = app.files['./avatars/' + avatarIndex + '.vrm'];
         await world.addObject(u, app.appId, position, quaternion); // XXX
 
         const objects = world.getObjects();
@@ -114,6 +112,11 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         console.warn(err);
         lock = false;
       }
+    }
+    if (avatarIndex === 10) {
+      avatarIndex = 0;
+    } else {
+      avatarIndex++;
     }
   });
 
