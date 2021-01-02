@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import {scene, renderer, camera, runtime, world, physics, ui, app, appManager} from 'app';
 
+// test
 // MIRROR
 import {Reflector} from './Reflector.js';
 
