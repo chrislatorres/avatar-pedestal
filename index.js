@@ -100,8 +100,19 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
         const u = app.files['./' + randomAvatar];
         const transforms = physics.getRigTransforms();
         const {position, quaternion} = transforms[0];
-        currentAvatar = await world.addObject(u, app.appId, position, quaternion); // XXX
-        console.log("currentAvatar set", currentAvatar);
+        await world.addObject(u, app.appId, position, quaternion); // XXX
+
+        const objects = world.getObjects();
+        Promise.all(objects.forEach(obj => {
+          console.log("u", u);
+          console.log("obj.contentId", obj.contentId);
+          if (obj.contentId === u)  {
+            currentAvatar = obj.instanceId;
+            console.log("set currentAvatar, instanceId", obj.instanceId);
+          }
+        }));
+
+        console.log("world.getObjects", world.getObjects());
 
 //        currentAvatar = u;
       } catch(err) {
