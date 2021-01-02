@@ -88,7 +88,7 @@ const physicsId = physics.addBoxGeometry(mirrorMesh.position, mirrorMesh.quatern
       const {quaternion} = app.object;
       console.log("position1", position);
       const rotation = new THREE.Matrix4().makeRotationZ(Math.PI/2);
-      position = app.object.position.applyMatrix4(rotation);
+      const position = app.object.position.applyMatrix4(rotation);
       console.log("position2", position);
 
 
